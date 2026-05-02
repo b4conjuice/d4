@@ -4,7 +4,7 @@ import { format } from 'date-fns'
 
 export const Route = createFileRoute('/')({ component: Home })
 
-const DAYS = ['Sun', 'Mon', 'Tues', 'Wed', 'Thu', 'Fri', 'Sat']
+const DAYS = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']
 
 const MAX_DAYS: Record<number, number> = {
   0: 31,
