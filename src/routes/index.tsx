@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { createFileRoute } from '@tanstack/react-router'
 import { format } from 'date-fns'
+import { useLocalStorage } from '@uidotdev/usehooks'
 
 export const Route = createFileRoute('/')({ component: Home })
 
@@ -35,7 +36,25 @@ function getRandomDate(year: number) {
   return randomDate
 }
 
+type GameState = {
+  date: Date
+  selectedDay: string
+  guess: string | null
+}
+
+function calculateScore({
+  score,
+  gameState,
+}: {
+  score: number
+  gameState: GameState
+}) {
+  const { date, guess } = gameState
+  return DAYS[Number(guess)] === format(date, 'E') ? score + 1 : score
+}
+
 function Home() {
+  const [score, setScore] = useLocalStorage('d4-score', 0)
   const now = new Date()
   const year = now.getFullYear()
   const piDay = new Date(year, 2, 14)
@@ -77,7 +96,9 @@ function Home() {
             type='button'
             className='bg-cobalt hover:bg-cobalt/75 border-cb-dusty-blue rounded border-2 p-2 text-white'
             onClick={() => {
-              setGameState({ ...gameState, guess: selectedDay })
+              const newGameState = { ...gameState, guess: selectedDay }
+              setGameState(newGameState)
+              setScore(calculateScore({ score, gameState: newGameState }))
             }}
           >
             submit guess
@@ -100,6 +121,7 @@ function Home() {
             </button>
           </>
         )}
+        <p>score: {score}</p>
       </div>
     </main>
   )

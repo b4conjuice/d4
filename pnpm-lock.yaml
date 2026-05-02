@@ -30,6 +30,9 @@ dependencies:
   '@tanstack/router-plugin':
     specifier: ^1.132.0
     version: 1.167.32(@tanstack/react-router@1.169.1)(vite@8.0.10)
+  '@uidotdev/usehooks':
+    specifier: ^2.4.1
+    version: 2.4.1(react-dom@19.2.5)(react@19.2.5)
   date-fns:
     specifier: ^4.1.0
     version: 4.1.0
@@ -1836,6 +1839,17 @@ packages:
       '@typescript-eslint/types': 8.59.1
       eslint-visitor-keys: 5.0.1
     dev: true
+
+  /@uidotdev/usehooks@2.4.1(react-dom@19.2.5)(react@19.2.5):
+    resolution: {integrity: sha512-1I+RwWyS+kdv3Mv0Vmc+p0dPYH0DTRAo04HLyXReYBL9AeseDWUJyi4THuksBJcu9F0Pih69Ak150VDnqbVnXg==}
+    engines: {node: '>=16'}
+    peerDependencies:
+      react: '>=18.0.0'
+      react-dom: '>=18.0.0'
+    dependencies:
+      react: 19.2.5
+      react-dom: 19.2.5(react@19.2.5)
+    dev: false
 
   /@unrs/resolver-binding-android-arm-eabi@1.11.1:
     resolution: {integrity: sha512-ppLRUgHVaGRWUx0R0Ut06Mjo9gBaBkg3v/8AxusGLhsIotbBLuRk51rAzqLC8gq6NyyAojEXglNjzf6R948DNw==}
