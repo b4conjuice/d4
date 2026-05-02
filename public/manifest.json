@@ -1,0 +1,8 @@
+{
+  "name": "d4",
+  "short_name": "d4",
+  "lang": "en-US",
+  "start_url": "/",
+  "display": "standalone",
+  "scope": "/"
+}
