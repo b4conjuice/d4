@@ -69,6 +69,24 @@ function Home() {
     selectedDay: string
     guess: string | null
   }>(defaultGameState)
+
+  const selectDay = (e: React.ChangeEvent<HTMLSelectElement>) => {
+    setGameState({ ...gameState, selectedDay: e.target.value })
+  }
+
+  const submitGuess = () => {
+    const newGameState = { ...gameState, guess: selectedDay }
+    setGameState(newGameState)
+    setScore(calculateScore({ score, gameState: newGameState }))
+  }
+
+  const resetGame = () => {
+    setGameState({
+      ...defaultGameState,
+      date: getRandomDate(year),
+    })
+  }
+
   const { date, selectedDay, guess } = gameState
   return (
     <main className='flex grow flex-col p-4'>
@@ -77,13 +95,7 @@ function Home() {
         <p>year: {year}</p>
         <p>doomsday: {doomsday}</p>
         <p>guess the day of {format(date, 'M.d.yy')}</p>
-        <select
-          className='bg-cobalt'
-          value={selectedDay}
-          onChange={e =>
-            setGameState({ ...gameState, selectedDay: e.target.value })
-          }
-        >
+        <select className='bg-cobalt' value={selectedDay} onChange={selectDay}>
           <option value=''>day</option>
           {DAYS.map((day, index) => (
             <option key={day} value={index}>
@@ -95,11 +107,7 @@ function Home() {
           <button
             type='button'
             className='bg-cobalt hover:bg-cobalt/75 border-cb-dusty-blue rounded border-2 p-2 text-white disabled:pointer-events-none disabled:opacity-25'
-            onClick={() => {
-              const newGameState = { ...gameState, guess: selectedDay }
-              setGameState(newGameState)
-              setScore(calculateScore({ score, gameState: newGameState }))
-            }}
+            onClick={submitGuess}
             disabled={selectedDay === ''}
           >
             submit guess
@@ -111,12 +119,7 @@ function Home() {
             <button
               type='button'
               className='bg-cobalt hover:bg-cobalt/75 border-cb-dusty-blue rounded border-2 p-2 text-white'
-              onClick={() => {
-                setGameState({
-                  ...defaultGameState,
-                  date: getRandomDate(year),
-                })
-              }}
+              onClick={resetGame}
             >
               play again
             </button>
