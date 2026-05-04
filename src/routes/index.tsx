@@ -94,12 +94,13 @@ function Home() {
         {guess === null ? (
           <button
             type='button'
-            className='bg-cobalt hover:bg-cobalt/75 border-cb-dusty-blue rounded border-2 p-2 text-white'
+            className='bg-cobalt hover:bg-cobalt/75 border-cb-dusty-blue rounded border-2 p-2 text-white disabled:pointer-events-none disabled:opacity-25'
             onClick={() => {
               const newGameState = { ...gameState, guess: selectedDay }
               setGameState(newGameState)
               setScore(calculateScore({ score, gameState: newGameState }))
             }}
+            disabled={selectedDay === ''}
           >
             submit guess
           </button>
